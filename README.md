@@ -32,12 +32,14 @@ A REST API backend for sembako (basic necessities) e-commerce application built 
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd finest-backend-test
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
@@ -45,6 +47,7 @@ A REST API backend for sembako (basic necessities) e-commerce application built 
 3. **Set up environment variables**
 
    Create a `.env` file in the root directory:
+
    ```env
    DB_HOST=localhost
    DB_PORT=5432
@@ -58,6 +61,7 @@ A REST API backend for sembako (basic necessities) e-commerce application built 
 4. **Set up PostgreSQL database**
 
    Make sure PostgreSQL is running and create the database:
+
    ```sql
    CREATE DATABASE sembako_db;
    ```
@@ -65,22 +69,26 @@ A REST API backend for sembako (basic necessities) e-commerce application built 
 5. **Run database migrations and seeders**
 
    **Option A: Using CLI commands (Recommended for production)**
+
    ```bash
    npm run db:migrate    # Run all pending migrations
    npm run db:seed       # Run all seeders
    ```
 
    **Option B: Using auto-sync (Simpler for development)**
+
    ```bash
    npm start             # Will auto-sync and seed if tables don't exist
    ```
 
    **Reset database completely:**
+
    ```bash
    npm run db:reset      # Undo all migrations, re-run migrations and seeders
    ```
 
 6. **Start the application**
+
    ```bash
    npm start
    ```
@@ -96,6 +104,7 @@ Once the server is running, visit `http://localhost:3000/api-docs` to access the
 ### Authentication
 
 #### Login
+
 - **POST** `/api/auth/login`
 - **Description**: Authenticate user and get JWT token
 - **Request Body**:
@@ -121,6 +130,7 @@ Once the server is running, visit `http://localhost:3000/api-docs` to access the
 ### Products
 
 #### Get All Products
+
 - **GET** `/api/products`
 - **Description**: Get all available products
 - **Response**:
@@ -143,6 +153,7 @@ Once the server is running, visit `http://localhost:3000/api-docs` to access the
   ```
 
 #### Get Product by ID
+
 - **GET** `/api/products/:id`
 - **Description**: Get specific product details
 - **Parameters**: `id` (path parameter)
@@ -164,11 +175,13 @@ Once the server is running, visit `http://localhost:3000/api-docs` to access the
 ### Cart (Requires Authentication)
 
 All cart endpoints require JWT authentication. Include the token in the Authorization header:
+
 ```
 Authorization: Bearer <your-jwt-token>
 ```
 
 #### Get Cart Items
+
 - **GET** `/api/cart`
 - **Description**: Get all items in user's cart
 - **Response**:
@@ -195,6 +208,7 @@ Authorization: Bearer <your-jwt-token>
   ```
 
 #### Add Item to Cart
+
 - **POST** `/api/cart`
 - **Request Body**:
   ```json
@@ -220,6 +234,7 @@ Authorization: Bearer <your-jwt-token>
   ```
 
 #### Update Cart Item
+
 - **PUT** `/api/cart/:id`
 - **Request Body**:
   ```json
@@ -229,11 +244,13 @@ Authorization: Bearer <your-jwt-token>
   ```
 
 #### Remove Item from Cart
+
 - **DELETE** `/api/cart/:id`
 
 ### Transactions (Requires Authentication)
 
 #### Checkout Transaction
+
 - **POST** `/api/transactions/checkout`
 - **Description**: Process checkout for all items in cart
 - **Response**:
@@ -259,6 +276,7 @@ Authorization: Bearer <your-jwt-token>
   ```
 
 #### Get Transaction by ID
+
 - **GET** `/api/transactions/:id`
 - **Description**: Get specific transaction (user's own transactions only)
 - **Response**:
@@ -279,6 +297,7 @@ Authorization: Bearer <your-jwt-token>
 ## Database Migrations and Seeders
 
 ### Migrations
+
 Migrations are located in `src/database/migrations/` and manage database schema changes:
 
 - `20240101000001-create-users.js` - Users table
@@ -287,12 +306,14 @@ Migrations are located in `src/database/migrations/` and manage database schema 
 - `20240101000004-create-transactions.js` - Transactions table
 
 ### Seeders
+
 Seeders are located in `src/database/seeders/` and populate initial data:
 
 - `20240101000001-users.js` - Creates 2 test users
 - `20240101000002-products.js` - Creates 8 sample products
 
 ### Available Scripts
+
 - `npm run db:migrate` - Run all pending migrations
 - `npm run db:seed` - Run all seeders
 - `npm run db:reset` - Reset database (undo all migrations, re-migrate, and seed)
@@ -302,10 +323,12 @@ Seeders are located in `src/database/seeders/` and populate initial data:
 The application creates default test data via seeders:
 
 ### Test Users
+
 - **Username**: `testuser`, **Password**: `password123`
 - **Username**: `user2`, **Password**: `password123`
 
 ### Sample Products
+
 - Beras (5kg) - Rp 75,000
 - Minyak Goreng (2L) - Rp 30,000
 - Gula Pasir (1kg) - Rp 15,000
@@ -329,6 +352,7 @@ The API returns appropriate HTTP status codes:
 - **500**: Internal Server Error
 
 Error response format:
+
 ```json
 {
   "error": "Error Type",
@@ -340,12 +364,6 @@ Error response format:
 ## Database Schema
 
 See [ERD.md](./ERD.md) for detailed database schema and relationships.
-
-## Running Tests
-
-```bash
-npm test
-```
 
 ## License
 
